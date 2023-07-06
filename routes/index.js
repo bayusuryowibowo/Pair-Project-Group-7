@@ -18,7 +18,7 @@ router.get('/secretreservation',isAdmin,Controller.dataReservation)
 router.get('/cancelreservation',isLogin,Controller.cancelReservation)
 router.get('/editprofile',isLogin,Controller.editProfile)
 router.post('/editprofile',isLogin,Controller.saveProfile)
-router.get('/reservation/:code/delete',Controller.deleteReservation)
+router.get('/reservation/:code/delete',Controller)
 
 
 module.exports = router;

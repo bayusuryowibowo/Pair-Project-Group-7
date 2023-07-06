@@ -108,10 +108,11 @@ class Controller {
 
 
   static reservation(req, res) {
-    const msg = req.query.msg
+    const msg = req.query.msg ? req.query.msg.split('-').join(' ') : null; // logika untuk mengolah message ke tampilan nanti
+    const role = req.session.role // role untuk navbar dinamis
     Dish.findAll()
       .then((dataDish) => {
-        res.render("Reservation", { dataDish, msg })
+        res.render("Reservation", { dataDish, msg, role })
       })
       .catch((err) => {
         console.log(err);
@@ -134,7 +135,7 @@ class Controller {
         return Reservation.create({ date, tableNumber, totalPrice, DishId, UserId })
       })
       .then(() => {
-        res.redirect('/reservation?msg=ReservationAdded')
+        res.redirect('/reservation?msg=Reservation-Added')
       })
       .catch((err) => {
         console.log(err);
@@ -157,7 +158,18 @@ class Controller {
   }
 
   static dataReservation(req,res) {
-    res.render('secretReservation')
+    // res.render('secretReservation')
+    Reservation.findAll({
+      include: {
+        model: User,
+        model: Dish
+      }
+    })
+      .then((data) => res.send(data))
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
   }
   static editProfile(req,res) {
      const UserId = req.session.userId
