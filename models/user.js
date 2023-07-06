@@ -13,11 +13,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasOne(models.Profile)
+      
     }
   }
   User.init({
     username: {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
         notEmpty: { msg: 'Username is required' },
         notNull: { msg: 'Username is required' },
@@ -26,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     email:  {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
         notEmpty: { msg: 'Email is required' },
         notNull: { msg: 'Email is required' },
@@ -34,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     password:  {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
         notEmpty: { msg: 'Password is required' },
         notNull: { msg: 'Password is required' },
@@ -54,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
   User.addHook('beforeSave',(user)=>{
     const salt = bcrypt.genSaltSync(10);
     user.password = bcrypt.hashSync(user.password, salt);
+    user.role = 'user'
 
   })
   return User;
