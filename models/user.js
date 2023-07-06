@@ -56,8 +56,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.addHook('beforeSave',(user)=>{
-    const salt = bcrypt.genSaltSync(10);
-    user.password = bcrypt.hashSync(user.password, salt);
+    const salt = bcrpyt.genSaltSync(10);
+    user.password = bcrpyt.hashSync(user.password, salt);
     user.role = 'user'
 
   })

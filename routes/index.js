@@ -5,7 +5,8 @@ const router = express.Router()
 
 router.get('/',Controller.home)
 router.get('/register', Controller.register)
-router.post('/register')
-router.get('/login',)
+router.post('/register', Controller.createUser)
+router.get('/login',Controller.login)
 router.post('/login')
+router.get('/dishes')
 module.exports = router;
