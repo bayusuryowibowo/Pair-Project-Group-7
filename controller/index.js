@@ -151,9 +151,24 @@ class Controller {
   }
 
   static dataReservation(req,res) {
-    res.render('secretReservation')
-
-
+    Reservation.findAll({
+      include:[
+        {
+           model:User
+        },
+        {
+          model:Dish
+        }
+        ]
+    })
+    .then((data)=>{
+      console.log(data)
+      res.render('SecretReservation',{data,formatCurrency})
+    })
+     .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
   }
 
 
