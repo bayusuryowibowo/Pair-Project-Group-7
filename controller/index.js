@@ -3,19 +3,17 @@ const formatCurrency = require('../helpers/formatCurrency')
 const { User, Profile, Dish, Reservation } = require('../models/index')
 const bcrpyt = require('bcryptjs')
 
-
-
 class Controller {
-  static home(req,res) {
+  static home(req, res) {
     const role = req.session.role
-     Dish.findAll()
-    .then((dataDish)=>{
-      res.render("Home", {dataDish,formatCurrency,role})
-    })
-    .catch ((err)=>{
-      console.log(err);
-      res.send(err);
-    })
+    Dish.findAll()
+      .then((dishes) => {
+        res.render('Home', { dishes,formatCurrency,role })
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
   }
   static register(req, res) {
     res.render("Register")
