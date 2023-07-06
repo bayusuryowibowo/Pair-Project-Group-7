@@ -45,45 +45,31 @@
   </header>
   <!-- section reservation -->
   <div>
-     <% if (msg) { %>
-     <p style="color: red;"><%= msg %></p>
-      
-     <% } %>
     <h1>Reservation</h1>
-    <button onclick="location.href='/cancelreservation'" class="btn btn-danger">Cancel Reservation</button>
-    <form action="" method="post">
-      <div class="mb-3">
-        <label for="date" class="form-label">Date of Reservation :</label>
-        <input type="datetime-local" name="date" class="form-control">
-      </div>
-      <div class="mb-3">
-        <label for="tableNumber" class="form-label">Table Number :</label>
-        <select name="tableNumber" class="form-control">
-          <option value="" selected>--Select Table Number--</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-      </div>
-      <div>
-        <h2>Choose 1 dish for your serving</h2>
-        <!-- looping data dishes di sini -->
-        <% dataDish.forEach(perDish => { %>
-         
-        <div class="card" style="width: 18rem;">
-          <!-- foto hidangan -->
-          <img src="<%= perDish.imgURL %>" class="card-img-top">
-          <div class="card-body">
-            <!-- nama hidangan -->
-            <h5 class="card-title"></h5>
-            <!-- deskripsi hidangan -->
-            <p class="card-text"></p>
-            <button class="btn btn-primary" type="submit" name="DishId"value="<%= perDish.id %>">Order</button>
-        <% }) %>
-          </div>
-        </div>
-      </div>
-    </form>
+    <button onclick="location.href='/datareservation'" class="btn btn-danger">Cancel Reservation</button>
+    <table style="border: 1px solid;">
+
+     <tr>
+        <th>Code</th>
+        <th>Date</th>
+        <th>Table Number</th>
+        <th>Total Price</th>
+        <th>Action</th>
+      </tr>
+   <% data.forEach(perData => { %>
+    
+      <tr>
+        <td><%= perData.code %></td>
+        <td><%= perData.date %></td>
+        <td><%= perData.tableNumber %></td>
+        <td><%= formatCurrency(perData.totalPrice) %></td>
+        <td>
+          <a href="/reservation/<%= perData.id %>/delete"><button>Delete</button></a>
+        </td>
+      </tr>
+   <% }) %>
+     
+    </table>
   </div>
   <!-- copyright dan nama para pembuat project di footer -->
   <footer>

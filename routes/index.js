@@ -15,5 +15,6 @@ router.get('/reservation',isLogin,Controller.reservation)
 router.get('/logout',Controller.logout)
 router.post('/reservation',Controller.postReservation)
 router.get('/datareservation',isAdmin,Controller.dataReservation)
+router.get('/cancelreservation',isLogin,Controller.cancelReservation)
 
 module.exports = router;

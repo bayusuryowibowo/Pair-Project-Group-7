@@ -8,7 +8,14 @@ const bcrpyt = require('bcryptjs')
 class Controller {
   static home(req,res) {
     const role = req.session.role
-    res.render('Home',{role})
+     Dish.findAll()
+    .then((dataDish)=>{
+      res.render("Home", {dataDish,formatCurrency,role})
+    })
+    .catch ((err)=>{
+      console.log(err);
+      res.send(err);
+    })
   }
   static register(req, res) {
     res.render("Register")
@@ -95,9 +102,10 @@ class Controller {
   
   
   static reservation (req,res) {
+    const msg = req.query.msg
     Dish.findAll()
     .then((dataDish)=>{
-      res.render("Reservation", {dataDish,formatCurrency})
+      res.render("Reservation", {dataDish,msg})
     })
     .catch ((err)=>{
       console.log(err);
@@ -106,7 +114,39 @@ class Controller {
   }
 
    static postReservation(req,res) {
-    res.send(req.body)
+    const {date, tableNumber,DishId} = req.body
+    const UserId = req.session.userId
+    let totalPrice
+    Dish.findOne({
+      where:{
+        id:DishId
+      }
+    })
+    .then((data)=>{
+      totalPrice = data.price;
+      console.log(date,tableNumber,DishId,totalPrice)
+    return Reservation.create({date,tableNumber,totalPrice,DishId,UserId})
+    })
+    .then(()=>{
+      res.redirect('/reservation?msg=ReservationAdded')
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
+
+  }
+
+  static cancelReservation(req,res) {
+    const UserId = req.session.userId
+    Reservation.findAll({where:{UserId:UserId}})
+    .then((data)=>{
+      res.render('CancelReservation',{data,formatCurrency,})
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
 
   }
 
