@@ -130,6 +130,19 @@ class Controller {
 
   }
 
+  static cancelReservation(req,res) {
+    const UserId = req.session.userId
+    Reservation.findAll({where:{UserId:UserId}})
+    .then((data)=>{
+      res.render('CancelReservation',{data,formatCurrency,})
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
+
+  }
+
   static dataReservation(req,res) {
     res.render('secretReservation')
 
