@@ -44,7 +44,7 @@
     </nav>
   </header>
   <!-- section reservation -->
-  <div>
+  <div class="container" id="container-input">
      <% if (msg) { %>
      <p style="color: red;"><%= msg %></p>
       
@@ -54,11 +54,11 @@
     <form action="" method="post">
       <div class="mb-3">
         <label for="date" class="form-label">Date of Reservation :</label>
-        <input type="datetime-local" name="date" class="form-control">
+        <input type="datetime-local" name="date" class="form-control w-50">
       </div>
       <div class="mb-3">
         <label for="tableNumber" class="form-label">Table Number :</label>
-        <select name="tableNumber" class="form-control">
+        <select name="tableNumber" class="form-control w-50">
           <option value="" selected>--Select Table Number--</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -67,20 +67,23 @@
       </div>
       <div>
         <h2>Choose 1 dish for your serving</h2>
-        <!-- looping data dishes di sini -->
-        <% dataDish.forEach(perDish => { %>
-         
-        <div class="card" style="width: 18rem;">
-          <!-- foto hidangan -->
-          <img src="<%= perDish.imgURL %>" class="card-img-top">
-          <div class="card-body">
-            <!-- nama hidangan -->
-            <h5 class="card-title"></h5>
-            <!-- deskripsi hidangan -->
-            <p class="card-text"></p>
-            <button class="btn btn-primary" type="submit" name="DishId"value="<%= perDish.id %>">Order</button>
-        <% }) %>
-          </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <!-- looping data dishes di sini -->
+          <% dataDish.forEach(perDish => { %>
+            <div class="col">
+              <div class="card" style="width: 21rem;">
+                <!-- foto hidangan -->
+                <img src="<%= perDish.imgURL %>" class="card-img-top">
+                <div class="card-body">
+                  <!-- nama hidangan -->
+                  <h5 class="card-title"><%= perDish.name %></h5>
+                  <!-- deskripsi hidangan -->
+                  <p class="card-text"><%= perDish.description %></p>
+                  <button class="btn btn-primary" type="submit" name="DishId"value="<%= perDish.id %>">Order</button>
+                </div>
+              </div>
+            </div>
+            <% }) %>
         </div>
       </div>
     </form>
