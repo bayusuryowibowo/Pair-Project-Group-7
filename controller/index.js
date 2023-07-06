@@ -1,9 +1,11 @@
+const formatCurrency = require('../helpers/formatCurrency')
 const {User, Profile, Dish, Reservation} = require('../models/index')
+formatCurrency
 
 class Controller {
 
   static home(req,res) {
-    res.send('home')
+    res.render("Home")
 
   }
 
@@ -33,6 +35,14 @@ class Controller {
  static postLogin (req,res) {
     console.log(req.body)
   }
+
+  static dishes (req,res) {
+    Dish.findAll()
+    .then((dataDish)=>{
+      res.render("Dishes", {dataDish,formatCurrency})
+    })
+  }
+  
   
 }
 
