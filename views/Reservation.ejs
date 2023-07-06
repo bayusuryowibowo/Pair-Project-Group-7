@@ -21,12 +21,14 @@
             <li>
               <a class="nav-link" href="/">Home</a>
             </li>
+            <% if (!role) { %>
             <li class="nav-item">
               <a class="nav-link" href="/register">Register</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
+            <% } %>
             <!-- link Reservation disesuaikan dengan route-nya nanti -->
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/reservation">Reservation</a>
@@ -36,19 +38,23 @@
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <!-- link Logout disesuaikan dengan route-nya nanti -->
+            <% if (role) { %>
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>
             </li>
+            <% } %>
           </ul>
         </div>
     </nav>
   </header>
   <!-- section reservation -->
   <div class="container" id="container-input">
-     <% if (msg) { %>
-     <p style="color: red;"><%= msg %></p>
-      
-     <% } %>
+    <% if (msg) { %>
+      <div class="alert alert-success alert-dismissible fade show w-25" role="alert">
+        <strong><%= msg %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } %>
     <h1>Reservation</h1>
     <button onclick="location.href='/cancelreservation'" class="btn btn-danger">Cancel Reservation</button>
     <form action="" method="post">

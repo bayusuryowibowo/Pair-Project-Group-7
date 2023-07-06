@@ -21,34 +21,37 @@
             <li>
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
+            <% if (!role) { %>
             <li class="nav-item">
               <a class="nav-link" href="/register">Register</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
+            <% } %>
             <!-- link Reservation disesuaikan dengan route-nya nanti -->
             <li class="nav-item">
               <a class="nav-link" href="/reservation">Reservation</a>
-
-              <% if (role == 'admin') { %>
-                 <li class="nav-item">
-              <a class="nav-link" href="/secretreservation">Data Reservation</a>
-
-              <% } %>
-
             </li>
+            <% if (role == 'admin') { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/secretreservation">Data Reservation</a>
+            </li>
+            <% } %>
           </ul>
         </div>
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
-            <!-- link Logout disesuaikan dengan route-nya nanti -->
-             <li>
-              <a href="/editprofile">Edit Profile</a>
+            <% if (role) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/editprofile">Edit Profile</a>
             </li>
-            <li>
+            <!-- link Logout disesuaikan dengan route-nya nanti -->
+            <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>
             </li>
+            <% } %>
+            
           </ul>
         </div>
     </nav>
