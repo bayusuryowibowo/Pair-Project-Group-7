@@ -29,7 +29,7 @@
             </li>
             <!-- link Reservation disesuaikan dengan route-nya nanti -->
             <li class="nav-item">
-              <a class="nav-link" href="">Reservation</a>
+              <a class="nav-link" href="/reservation">Reservation</a>
             </li>
           </ul>
         </div>
@@ -37,7 +37,7 @@
           <ul class="navbar-nav">
             <!-- link Logout disesuaikan dengan route-nya nanti -->
             <li class="nav-item">
-              <a class="nav-link" href="">Logout</a>
+              <a class="nav-link" href="/logout">Logout</a>
             </li>
           </ul>
         </div>
@@ -47,22 +47,22 @@
   <div>
     <h1>Register</h1>
     <form action="/register" method="post">
-      <div>
-        <label for="username">Username :</label>
-        <input type="text" name="username">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username :</label>
+        <input type="text" name="username" class="form-control">
       </div>
-      <div>
-        <label for="email">Email :</label>
-        <input type="email" name="email">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email :</label>
+        <input type="email" name="email" class="form-control">
       </div>
-      <div>
-        <label for="password">Password :</label>
-        <input type="password" name="password" id="">
+      <div class="mb-3">
+        <label for="password" class="form-label">Password :</label>
+        <input type="password" name="password" class="form-control">
       </div>
       <!-- tidak perlu input role karena role otomatis menjadi "user" atau "customer" by Default -->
-      <button type="submit">Register</button>
+      <button type="submit" class="btn btn-primary">Register</button>
     </form>
-    <button onclick="location.href='/'">Cancel</button>
+    <button onclick="location.href='/'" class="btn btn-danger">Cancel</button>
   </div>
   <!-- copyright dan nama para pembuat project di footer -->
   <footer>

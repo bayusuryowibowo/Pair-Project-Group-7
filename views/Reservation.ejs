@@ -29,7 +29,7 @@
             </li>
             <!-- link Reservation disesuaikan dengan route-nya nanti -->
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">Reservation</a>
+              <a class="nav-link active" aria-current="page" href="/reservation">Reservation</a>
             </li>
           </ul>
         </div>
@@ -37,7 +37,7 @@
           <ul class="navbar-nav">
             <!-- link Logout disesuaikan dengan route-nya nanti -->
             <li class="nav-item">
-              <a class="nav-link" href="">Logout</a>
+              <a class="nav-link" href="/logout">Logout</a>
             </li>
           </ul>
         </div>
@@ -46,23 +46,20 @@
   <!-- section reservation -->
   <div>
     <h1>Reservation</h1>
-    <button onclick="location.href='/'">Cancel Reservation</button>
+    <button onclick="location.href='/'" class="btn btn-danger">Cancel Reservation</button>
     <form action="" method="post">
-      <div>
-        <label for="date">Date of Reservation :</label>
-        <input type="datetime" name="date" id="">
+      <div class="mb-3">
+        <label for="date" class="form-label">Date of Reservation :</label>
+        <input type="datetime" name="date" class="form-control">
       </div>
-      <div>
-        <label for="tableNumber">Table Number :</label>
-        <select name="tableNumber" id="">
+      <div class="mb-3">
+        <label for="tableNumber" class="form-label">Table Number :</label>
+        <select name="tableNumber" class="form-control">
           <option value="" selected>--Select Table Number--</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
         </select>
-      </div>
-      <div>
-        <button href="/">Cancel</button>
       </div>
       <div>
         <h2>Choose 1 dish for your serving</h2>
