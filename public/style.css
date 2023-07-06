@@ -1,3 +1,7 @@
 #navbar {
   background: linear-gradient(to right, #800000, #800000);
 }
+
+#container-input {
+  padding-top: 50px;
+}
