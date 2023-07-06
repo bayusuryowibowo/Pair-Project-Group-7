@@ -64,6 +64,7 @@ module.exports = (sequelize, DataTypes) => {
     user.role = 'user'
 
   })
+  
   return User;
 
   

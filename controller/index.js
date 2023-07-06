@@ -20,7 +20,17 @@ class Controller {
   }
   static createUser(req, res) {
     User.create(req.body)
-      .then(() => {
+      .then((data) => {
+        const {id} = data
+        req.session.userId = id
+        console.log(req.session.userId)
+        return Profile.create({
+          fullName: "",
+          gender : "",
+          UserId : id,
+        })
+      })
+      .then(()=>{
         res.redirect('/')
       })
       .catch((err) => {
@@ -34,9 +44,9 @@ class Controller {
   }
 
 
-  static login(req, res) {
-    let { error } = req.query;
-    res.render("Login", { error })
+  static login (req,res) {
+    let {error} = req.query;
+    res.render("Login",{error})
 
   }
 
@@ -48,28 +58,31 @@ class Controller {
     }
     if (!password) {
       let error = `Password is required`;
-      return res.redirect(`/login?error=${error}`)
+
+      res.redirect(`/login?error=${error}`)
+
     }
     User.findOne({
       where: {
         username: username
       }
     })
-      .then((user) => {
-        const isCorrectPassword = bcrpyt.compareSync(password, user.password)
-        if (isCorrectPassword) {
-          req.session.userId = user.id;//set userId ke session 
-          req.session.role = user.role;//set role ke session
-          return res.redirect('/')
-        } else {
-          let error = 'Invalid username/password'
-          return res.redirect(`/login?error=${error}`)
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        res.send(err);
-      })
+
+    .then((user)=>{
+    const isCorrectPassword = bcrpyt.compareSync(password, user.password)
+    if (isCorrectPassword){
+      req.session.userId = user.id;//set userId ke session 
+      req.session.role = user.role;//set role ke session
+      return res.redirect('/')
+    } else {
+      let error = 'Invalid username/password'
+      return res.redirect(`/login?error=${error}`)
+    }
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
 
   }
 
@@ -132,23 +145,48 @@ class Controller {
 
   static cancelReservation(req, res) {
     const UserId = req.session.userId
-    Reservation.findAll({ where: { UserId: UserId } })
-      .then((data) => {
-        res.render('CancelReservation', { data, formatCurrency, })
-      })
-      .catch((err) => {
-        console.log(err);
-        res.send(err);
-      })
+    Reservation.findAll({where:{UserId:UserId}})
+    .then((data)=>{
+      res.render('CancelReservation',{data,formatCurrency,})
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
 
   }
 
-  static dataReservation(req, res) {
+  static dataReservation(req,res) {
     res.render('secretReservation')
-
-
+  }
+  static editProfile(req,res) {
+     const UserId = req.session.userId
+    Profile.findOne({where:{
+      UserId: UserId
+    }})
+    .then((data)=>{
+      res.render('EditProfile',{data})
+    })
+     .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
   }
 
+   static saveProfile(req,res) {
+    const UserId = req.session.userId
+    const {fullName,gender} = req.body
+    Profile.update({fullName,gender,UserId},{
+      where:{UserId:UserId}
+    })
+    .then(()=>{
+      res.redirect('/')
+    })
+     .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
+  }
 
 }
 
