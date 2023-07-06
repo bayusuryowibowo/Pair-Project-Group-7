@@ -3,8 +3,8 @@ const {User, Profile, Dish, Reservation} = require('../models/index')
 class Controller {
 
   static home(req,res) {
-    res.send('home')
-
+    // res.send('home')
+    res.render('Home')
   }
 
    static register(req,res) {
