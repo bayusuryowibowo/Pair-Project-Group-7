@@ -22,7 +22,15 @@ class Controller {
   }
   static createUser(req, res) {
     User.create(req.body)
-      .then(() => {
+      .then((data) => {
+        const {id} = data
+        return Profile.create({
+          fullName: "",
+          gender : "",
+          UserId : id,
+        })
+      })
+      .then(()=>{
         res.redirect('/')
       })
       .catch((err) => {
@@ -38,7 +46,7 @@ class Controller {
 
   static login (req,res) {
     let {error} = req.query;
-    res.render("Login",{error})
+    res.render('Login',{error})
 
   }
 
@@ -46,22 +54,17 @@ class Controller {
     const { username, password } = req.body
     if (!username) {
       let error = `Username is required`;
-
-      res.redirect(`/login?error=${error}`)
-
+      return res.redirect(`/login?error=${error}`)
     }
     if (!password) {
       let error = `Password is required`;
-
-      res.redirect(`/login?error=${error}`)
-
+     return  res.redirect(`/login?error=${error}`)
     }
     User.findOne({
       where: {
         username: username
       }
     })
-
     .then((user)=>{
     const isCorrectPassword = bcrpyt.compareSync(password, user.password)
     if (isCorrectPassword){
@@ -171,6 +174,34 @@ class Controller {
     })
   }
 
+  static editProfile(req,res) {
+     const UserId = req.session.userId
+    Profile.findOne({where:{
+      UserId: UserId
+    }})
+    .then((data)=>{
+      res.render('EditProfile',{data})
+    })
+     .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
+  }
+
+   static saveProfile(req,res) {
+    const UserId = req.session.userId
+    const {fullName,gender} = req.body
+    Profile.update({fullName,gender,UserId},{
+      where:{UserId:UserId}
+    })
+    .then(()=>{
+      res.redirect('/')
+    })
+     .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
+  }
 
 }
 

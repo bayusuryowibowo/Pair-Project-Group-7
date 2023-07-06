@@ -16,5 +16,8 @@ router.get('/logout',Controller.logout)
 router.post('/reservation',Controller.postReservation)
 router.get('/datareservation',isAdmin,Controller.dataReservation)
 router.get('/cancelreservation',isLogin,Controller.cancelReservation)
+router.get('/editprofile',isLogin,Controller.editProfile)
+router.post('/editprofile',isLogin,Controller.saveProfile)
+
 
 module.exports = router;

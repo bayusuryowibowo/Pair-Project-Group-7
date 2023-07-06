@@ -11,7 +11,6 @@
 <body>
   <!-- navigation bar nanti dibuat dinamis jika masih ada sisa waktu -->
   <header>
-
     <nav id="navbar" class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -19,81 +18,56 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-
             <li>
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/register">Register</a>
+              <a class="nav-link active" aria-current="page" href="/register">Register</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
             <!-- link Reservation disesuaikan dengan route-nya nanti -->
-
             <li class="nav-item">
               <a class="nav-link" href="/reservation">Reservation</a>
-
-              <% if (role == 'admin') { %>
-                 <li class="nav-item">
-              <a class="nav-link" href="/datareservation">Data Reservation</a>
-
-              <% } %>
-
             </li>
           </ul>
         </div>
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <!-- link Logout disesuaikan dengan route-nya nanti -->
-             <li>
-              <a href="/editprofile">Edit Profile</a>
-            </li>
-            <li>
-              <a href="/logout">Logout</a>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
             </li>
           </ul>
         </div>
     </nav>
   </header>
-  <!-- section welcoming -->
+  <!-- form input register -->
   <div>
-    <h1>Welcome to Dimbay's Steak House</h1>
-  </div>
-  <!-- tampilan menu yang tersedia -->
-  <div>
-    <h2>Menu</h2>
-    <div>
-      <% dataDish.forEach(perDish => { %>
-       
-      <!-- foto hidangan -->
-      <img src="<%= perDish.imgURL %>">
-      <div>
-        <!-- nama hidangan -->
-        <h5><%= perDish.name %></h5>
-        <!-- deskripsi hidangan -->
-        <p><%= perDish.description %></p>
-      <% }) %>
+    <h1>Edit Profile</h1>
+    <form action="/editprofile" method="post">
+      <div class="mb-3">
+        <label for="username" class="form-label">Full Name</label>
+        <input type="text" name="fullName" class="form-control" value="<%= data.fullName %>">
       </div>
-    </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Gender :</label>
+       <select name="gender">
+        <option value="" selected disabled><%= data.gender %></option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+       </select>
+      </div>
+      <!-- tidak perlu input role karena role otomatis menjadi "user" atau "customer" by Default -->
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <button onclick="location.href='/'" class="btn btn-danger">Cancel</button>
   </div>
   <!-- copyright dan nama para pembuat project di footer -->
   <footer>
-    <!-- <div>
-      <h6>This project was created by :</h6>
-      <strong>Bayu Suryo Wibowo</strong><br>
-      <strong>Dimas Hananto</strong>
-    </div>
-    <div>
-      <h6>Disclaimer</h6>
-      <p>We don't own these images.</p>
-      <p>These images belongs to :</p>
-      <p><a href="https://www.freepik.com/free-photo/grilled-beef-steak-dark-wooden-surface_14454667.htm#query=tenderloin%20steak&position=0&from_view=search&track=ais">Image by jcomp</a> on Freepik</p>
-      <p><a href="https://www.freepik.com/free-photo/grilled-beef-steak-with-fries-grilled-tomato-pepper-sauces_8058187.htm#page=2&query=sirloin%20steak&position=8&from_view=search&track=ais">Image by KamranAydinov</a> on Freepik</p>
-      <p>Image by <a href="https://www.freepik.com/free-photo/wine-glass-bottle-barrel_4884534.htm#query=Cabernet%20Sauvignon&position=10&from_view=search&track=ais">Freepik</a></p>
-    </div> -->
+    
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>
-
