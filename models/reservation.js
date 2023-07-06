@@ -17,8 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     createCode() {
-      this.code = this.date.toISOString().replace(/\D/g,'');
-      
+      return this.code = new Date().toISOString().replace(/\D/g,'');
     }
     
   }
@@ -35,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Reservation.addHook("beforeSave",(reservation)=>{
-    reservation.code
+    reservation.code = reservation.createCode();
   })
   return Reservation;
 };

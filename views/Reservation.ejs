@@ -45,12 +45,16 @@
   </header>
   <!-- section reservation -->
   <div>
+     <% if (msg) { %>
+     <p style="color: red;"><%= msg %></p>
+      
+     <% } %>
     <h1>Reservation</h1>
     <button onclick="location.href='/'" class="btn btn-danger">Cancel Reservation</button>
     <form action="" method="post">
       <div class="mb-3">
         <label for="date" class="form-label">Date of Reservation :</label>
-        <input type="datetime" name="date" class="form-control">
+        <input type="datetime-local" name="date" class="form-control">
       </div>
       <div class="mb-3">
         <label for="tableNumber" class="form-label">Table Number :</label>
@@ -64,15 +68,18 @@
       <div>
         <h2>Choose 1 dish for your serving</h2>
         <!-- looping data dishes di sini -->
+        <% dataDish.forEach(perDish => { %>
+         
         <div class="card" style="width: 18rem;">
           <!-- foto hidangan -->
-          <img src="" class="card-img-top">
+          <img src="<%= perDish.imgURL %>" class="card-img-top">
           <div class="card-body">
             <!-- nama hidangan -->
             <h5 class="card-title"></h5>
             <!-- deskripsi hidangan -->
             <p class="card-text"></p>
-            <button class="btn btn-primary" type="submit" value="<%=%>">Order</button>
+            <button class="btn btn-primary" type="submit" name="DishId"value="<%= perDish.id %>">Order</button>
+        <% }) %>
           </div>
         </div>
       </div>

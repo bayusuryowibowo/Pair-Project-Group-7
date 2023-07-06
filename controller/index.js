@@ -95,9 +95,10 @@ class Controller {
   
   
   static reservation (req,res) {
+    const msg = req.query.msg
     Dish.findAll()
     .then((dataDish)=>{
-      res.render("Reservation", {dataDish,formatCurrency})
+      res.render("Reservation", {dataDish,msg})
     })
     .catch ((err)=>{
       console.log(err);
@@ -106,7 +107,26 @@ class Controller {
   }
 
    static postReservation(req,res) {
-    res.send(req.body)
+    const {date, tableNumber,DishId} = req.body
+    const UserId = req.session.userId
+    let totalPrice
+    Dish.findOne({
+      where:{
+        id:DishId
+      }
+    })
+    .then((data)=>{
+      totalPrice = data.price;
+      console.log(date,tableNumber,DishId,totalPrice)
+    return Reservation.create({date,tableNumber,totalPrice,DishId,UserId})
+    })
+    .then(()=>{
+      res.redirect('/reservation?msg=ReservationAdded')
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
 
   }
 
