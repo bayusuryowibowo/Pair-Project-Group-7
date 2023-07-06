@@ -55,13 +55,16 @@
   <div>
     <h2>Menu</h2>
     <div>
+      <% dataDish.forEach(perDish => { %>
+       
       <!-- foto hidangan -->
-      <img src="">
+      <img src="<%= perDish.imgURL %>">
       <div>
         <!-- nama hidangan -->
-        <h5></h5>
+        <h5><%= perDish.name %></h5>
         <!-- deskripsi hidangan -->
-        <p></p>
+        <p><%= perDish.description %></p>
+      <% }) %>
       </div>
     </div>
   </div>
