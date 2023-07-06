@@ -10,7 +10,7 @@
   <header>
     <nav>
       <div>
-        <a href="#">Logo</a>
+        <a href="/">Logo</a>
         <div>
           <ul>
             <li>
@@ -34,6 +34,9 @@
   <!-- form input login -->
   <div>
     <h1>Login</h1>
+    <% if (error) { %>
+     <p style="color: red;"><%= error %></p>
+    <% } %>
     <form action="/login" method="post">
       <div>
         <label for="username">Username :</label>
@@ -58,6 +61,5 @@
   <footer>
     
   </footer>
->>>>>>> 6daed01b435f870c1918ba774a50e7366d699a3a
 </body>
 </html>

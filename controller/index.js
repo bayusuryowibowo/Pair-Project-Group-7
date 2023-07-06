@@ -1,6 +1,9 @@
+
+const { Store } = require('express-session')
 const formatCurrency = require('../helpers/formatCurrency')
 const {User, Profile, Dish, Reservation} = require('../models/index')
 const bcrpyt =require('bcryptjs')
+const session = require('express-session')
 
 
 class Controller {
@@ -30,7 +33,7 @@ class Controller {
   }
 
   static login (req,res) {
-    let error
+    let {error} = req.query;
     res.render("Login",{error})
   }
 
@@ -38,11 +41,11 @@ class Controller {
     const {username, password} = req.body
     if (!username) {
       let error = `Username is required`;
-      res.render('Login',{error})
+      res.redirect(`/login?error=${error}`)
     }
      if (!password) {
       let error = `Password is required`;
-      res.render('Login',{error})
+      res.redirect(`/login?error=${error}`)
     }
     User.findOne({
       where:{
@@ -57,7 +60,7 @@ class Controller {
       return res.redirect('/')
     } else {
       let error = 'Invalid username/password'
-      return res.redirect('login',{error})
+      return res.redirect(`/login?error=${error}`)
     }
     })
     .catch((err)=>{
@@ -71,6 +74,25 @@ class Controller {
     .then((dataDish)=>{
       res.render("Dishes", {dataDish,formatCurrency})
     })
+    .catch ((err)=>{
+      console.log(err);
+      res.send(err);
+    })
+  }
+
+   static logout (req,res) {
+    req.session.destroy((err)=>{
+      if(err){
+        console.log(err);
+        res.send(err)
+      } else res.redirect('/')
+    })
+  }
+  
+  
+  static reservation (req,res) {
+    res.render('Reservation')
+
   }
   
   

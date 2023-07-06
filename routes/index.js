@@ -10,4 +10,7 @@ router.post('/register', Controller.createUser)
 router.get('/login',Controller.login)
 router.post('/login',Controller.postLogin)
 router.get('/dishes',isLogin,Controller.dishes)
+router.get('/reservation',isLogin,Controller.reservation)
+router.get('/logout',Controller.logout)
+
 module.exports = router;
