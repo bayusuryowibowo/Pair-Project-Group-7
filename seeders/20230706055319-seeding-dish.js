@@ -12,25 +12,9 @@ const data = JSON.parse(fs.readFileSync('./data/dishes.json','utf-8')).map((e)=>
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert("Dishes", data)
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
   },
 
   async down (queryInterface, Sequelize) {
     await queryInterface.bulkDelete("Dishes")
-    /**
-     * 
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
   }
 };
