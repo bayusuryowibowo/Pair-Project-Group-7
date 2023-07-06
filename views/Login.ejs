@@ -3,13 +3,13 @@
 
   <h1>Login</h1>
 
-  <form action="/login" method="post">
 
+  <form action="/login" method="post">
+    <% if (error) { %>
+     <p style="color: red;"><%= error %></p>
+    <% } %>
     <label for="">Username</label><br>
     <input type="text" name="username"><br><br>
-
-    <label for="">Email</label><br>
-    <input type="text" name="email"><br><br>
 
     <label for="">Password</label><br>
     <input type="password" name="password"><br><br>

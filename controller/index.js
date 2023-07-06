@@ -1,6 +1,6 @@
 const formatCurrency = require('../helpers/formatCurrency')
 const {User, Profile, Dish, Reservation} = require('../models/index')
-formatCurrency
+
 
 class Controller {
 
@@ -21,7 +21,8 @@ class Controller {
     })
     .catch((err)=>{
       console.log(err);
-        if (err.name === 'SequelizeValidationError') {
+        if (err.name === 'SequelizeValidationError'||
+        err.name ==="SequelizeUniqueConstraintError") {
           return res.send(err.errors.map((el) => el.message));
         }
       res.send(err);
@@ -33,7 +34,16 @@ class Controller {
   }
 
  static postLogin (req,res) {
-    console.log(req.body)
+    const {username, password} = req.body
+    if (!username) {
+      let error = `Username is required`;
+      res.render('Login',{error})
+    }
+     if (!password) {
+      let error = `Password is required`;
+      res.render('Login',{error})
+    }
+    console.log()
   }
 
   static dishes (req,res) {
