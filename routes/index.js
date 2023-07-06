@@ -1,20 +1,12 @@
-const express = require('express')
+const express = require('express');
+const Controller = require('../controller');
+
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  res.send('Landing page')
-}) // Landing Page atau Home Page
-router.get('/register', (req, res) => {
-  res.send('Register Page')
-}) // Register Page
-router.post('/register', (req, res) => {
-  res.send('Post Register')
-}) // Post Register
-router.get('/login', (req, res) => {
-  res.send('Login Page')
-}) // Login Page
-router.post('/login', (req, res) => {
-  res.send('Post Login')
-}) // Post Login
-
+router.get('/',Controller.home)
+router.get('/register', Controller.register)
+router.post('/register', Controller.createUser)
+router.get('/login',Controller.login)
+router.post('/login')
+router.get('/dishes')
 module.exports = router;
