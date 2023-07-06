@@ -24,6 +24,8 @@ class Controller {
     User.create(req.body)
       .then((data) => {
         const {id} = data
+        req.session.userId = id
+        console.log(req.session.userId)
         return Profile.create({
           fullName: "",
           gender : "",
@@ -142,7 +144,11 @@ class Controller {
 
   static cancelReservation(req,res) {
     const UserId = req.session.userId
-    Reservation.findAll({where:{UserId:UserId}})
+    Reservation.findAll({
+      where:{
+        UserId: UserId
+      }
+    })
     .then((data)=>{
       res.render('CancelReservation',{data,formatCurrency,})
     })
@@ -150,7 +156,22 @@ class Controller {
       console.log(err);
       res.send(err);
     })
+  }
 
+  static deleteReservation(req,res) {
+    const code = req.params.code
+    Reservation.destroy({
+      where:{
+        code: code
+      }
+    })
+    .then(()=>{
+      res.redirect('/cancelreservation')
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
   }
 
   static dataReservation(req,res) {
