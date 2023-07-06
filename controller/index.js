@@ -199,6 +199,25 @@ class Controller {
       res.send(err);
     })
   }
+  
+  static deleteReservation(req,res) {
+    const code = req.params.code
+    
+    Reservation.destroy({
+      where:{
+        code: code
+      }
+    })
+    .then(()=>{
+      if(req.session.role=='admin'){
+      res.redirect('/secretreservation')
+      } else  res.redirect('/cancelreservation')
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
+  }
 
 }
 
