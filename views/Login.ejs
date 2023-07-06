@@ -44,7 +44,7 @@
     </nav>
   </header>
   <!-- form input login -->
-  <div>
+  <div class="container" id="container-input">
     <h1>Login</h1>
     <% if (error) { %>
      <p style="color: red;"><%= error %></p>
@@ -52,11 +52,11 @@
     <form action="/login" method="post">
       <div class="mb-3">
         <label for="username" class="form-label">Username :</label>
-        <input type="text" name="username" class="form-control">
+        <input type="text" name="username" class="form-control w-50">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password :</label>
-        <input type="password" name="password" class="form-control">
+        <input type="password" name="password" class="form-control w-50">
       </div>
       <!-- tidak perlu input role karena role otomatis menjadi "user" atau "customer" by Default -->
       <div>
