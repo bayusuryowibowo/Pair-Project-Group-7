@@ -43,22 +43,26 @@
         </div>
     </nav>
   </header>
-  <!-- section welcoming -->
-  <div>
-    <h1>Welcome to Dimbay's Steak House</h1>
-  </div>
-  <!-- tampilan menu yang tersedia -->
-  <div>
-    <h2>Menu</h2>
+  <div class="bg-dark text-white">
+    <!-- section welcoming -->
+    <div class="p-3 mb-2" style="margin-bottom: 50px;">
+      <h1 class="text-center">Welcome to Dimbay's Steak House</h1>
+    </div> 
+    <!-- tampilan menu yang tersedia -->
     <div>
-      <!-- foto hidangan -->
-      <img src="">
-      <div>
-        <!-- nama hidangan -->
-        <h5></h5>
-        <!-- deskripsi hidangan -->
-        <p></p>
-      </div>
+      <!-- looping data dishes di sini -->
+      <% dishes.forEach(el => { %>
+        <div>
+          <!-- foto hidangan -->
+          <img src="<%= el.imgURL %>" class="img-fluid">
+          <div>
+            <!-- nama hidangan -->
+            <h5><%= el.name %></h5>
+            <!-- deskripsi hidangan -->
+            <p><%= el.description %></p>
+          </div>
+        </div>
+      <% }); %>
     </div>
   </div>
   <!-- copyright dan nama para pembuat project di footer -->

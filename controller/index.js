@@ -6,7 +6,14 @@ const bcrpyt = require('bcryptjs')
 class Controller {
 
   static home(req, res) {
-    res.render('Home')
+    Dish.findAll()
+      .then((dishes) => {
+        res.render('Home', { dishes })
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
   }
 
   static register(req, res) {
