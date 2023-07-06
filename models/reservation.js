@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       models.Dish.belongsToMany(models.User, {through: Reservation})
 
     }
+
+    createCode() {
+      this.code = this.date.toISOString().replace(/\D/g,'');
+      
+    }
+    
   }
   Reservation.init({
     code: DataTypes.STRING,
@@ -27,5 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Reservation',
   });
+
+  Reservation.addHook("beforeSave",(reservation)=>{
+    reservation.code
+  })
   return Reservation;
 };
