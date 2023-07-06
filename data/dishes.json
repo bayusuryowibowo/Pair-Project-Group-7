@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Tenderloin Steak",
+    "description": "Potongan daging steak bagian tengah sapi. Teksturnya yang paling lembut (mild) dan empuk ketimbang potongan daging lain membuatnya nikmat untuk Carnivores konsumsi.",
+    "imgURL": "https://www.freepik.com/free-photo/grilled-beef-steak-dark-wooden-surface_14454667.htm#query=tenderloin%20steak&position=0&from_view=search&track=ais",
+    "price": 525000
+  },
+  {
+    "name": "Sirloin Steak",
+    "description": "Potongan daging yang berasal dari punggung sapi. Bagian sirloin ini mengandung lebih banyak lemak jika dibandingkan dengan tenderloin.",
+    "imgURL": "https://www.freepik.com/free-photo/grilled-beef-steak-with-fries-grilled-tomato-pepper-sauces_8058187.htm#page=2&query=sirloin%20steak&position=8&from_view=search&track=ais",
+    "price": 405000
+  },
+  {
+    "name": "Cabernet Sauvignon",
+    "description": "Cabernet Sauvignon memiliki rasa black cherry, black currant, baking spices dan cedar dari barrel oaknya. Wine ini merupakan wine dengan jenis full-bodied wine. Full-bodied wine biasanya memiliki tannin yang lebih banyak, tingkat alkohol lebih tinggi, dan memiliki rasa buah gelap seperti black currant. Wine ini merupakan salah satu wine paling popular dan cocok dipadukan dengan beef, lamb, smoked meat, dan aged-cheese atau hard-cheese.",
+    "imgURL": "https://www.freepik.com/free-photo/wine-glass-bottle-barrel_4884534.htm#query=Cabernet%20Sauvignon&position=10&from_view=search&track=ais",
+    "price": 330000
+  }
+]
