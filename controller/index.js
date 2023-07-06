@@ -1,15 +1,15 @@
 
-const { Store } = require('express-session')
 const formatCurrency = require('../helpers/formatCurrency')
 const {User, Profile, Dish, Reservation} = require('../models/index')
 const bcrpyt =require('bcryptjs')
-const session = require('express-session')
+
 
 
 class Controller {
 
   static home(req,res) {
-    res.render('Home')
+    const role = req.session.role
+    res.render('Home',{role})
   }
 
    static register(req,res) {
@@ -53,10 +53,10 @@ class Controller {
       }
     })
     .then((user)=>{
-    
     const isCorrectPassword = bcrpyt.compareSync(password, user.password)
     if (isCorrectPassword){
       req.session.userId = user.id;//set userId ke session 
+      req.session.role = user.role;//set role ke session
       return res.redirect('/')
     } else {
       let error = 'Invalid username/password'
@@ -91,7 +91,23 @@ class Controller {
   
   
   static reservation (req,res) {
-    res.render('Reservation')
+    Dish.findAll()
+    .then((dataDish)=>{
+      res.render("Reservation", {dataDish,formatCurrency})
+    })
+    .catch ((err)=>{
+      console.log(err);
+      res.send(err);
+    })
+  }
+
+   static postReservation(req,res) {
+    res.send(req.body)
+
+  }
+
+  static dataReservation(req,res) {
+    res.render('secretReservation')
 
   }
   

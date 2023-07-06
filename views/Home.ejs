@@ -27,6 +27,14 @@
             <li>
               <a href="/logout">Logout</a>
             </li>
+              <% if (role == 'admin') { %>
+            <li>
+               <a href="/datareservation">Reservation Data</a>
+            </li>
+             <li>
+               <a href="/dishes">Dishes Data</a>
+            </li>
+              <% } %>
           </ul>
         </div>
     </nav>

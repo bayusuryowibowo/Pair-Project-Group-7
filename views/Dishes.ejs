@@ -1,4 +1,4 @@
-<%- include('/partials/Header.ejs', {title :'Dishes'}) %>
+<%- include('../views/partials/Header.ejs', {title :'Dishes'}) %>
 <body>
 
   <h1>Dishes</h1>
@@ -7,6 +7,7 @@
       border: 1px solid;
     }
   </style>
+  <a href="/dishes/:id/add">Add new Dish</a><br><br>
 
  <table>
   <tr>
@@ -14,6 +15,7 @@
     <th>Description</th>
     <th>ImgURL</th>
     <th>price</th>
+    <th>Action</th>
   </tr>
    <% dataDish.forEach(perDish => { %>
    <tr>
@@ -21,6 +23,9 @@
     <td><%= perDish.description %></td>
     <td><img src="<%= perDish.imgURL %>" alt=""></td>
     <td><%= formatCurrency(perDish.price) %></td>
+    <td>
+      <a href="/dishes/<%= perDish.id %>/delete"><button>Delete</button></a>
+    </td>
    </tr>
    <% }) %>
 
