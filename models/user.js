@@ -43,8 +43,8 @@ module.exports = (sequelize, DataTypes) => {
         notNull: { msg: 'Password is required' },
         isAlphanumeric:{mgs: "Password must include numbers"},
         len:{
-          args: [4, 20],
-          msg: "Password must be minimal 4 and maximum of 20 characters"
+          args: [8, 20],
+          msg: "Password must be minimal 8 and maximum of 20 characters"
         }
 
       }
