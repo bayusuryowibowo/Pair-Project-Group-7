@@ -2,6 +2,11 @@
 <body>
 
   <h1>Dishes</h1>
+  <style>
+    table,th,td{
+      border: 1px solid;
+    }
+  </style>
 
  <table>
   <tr>
@@ -10,6 +15,15 @@
     <th>ImgURL</th>
     <th>price</th>
   </tr>
+   <% dataDish.forEach(perDish => { %>
+   <tr>
+    <td><%= perDish.name %></td>
+    <td><%= perDish.description %></td>
+    <td><img src="<%= perDish.imgURL %>" alt=""></td>
+    <td><%= formatCurrency(perDish.price) %></td>
+   </tr>
+   <% }) %>
+
 
 
  </table>
