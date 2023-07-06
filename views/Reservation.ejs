@@ -31,30 +31,47 @@
         </div>
     </nav>
   </header>
-  <!-- form input register -->
+  <!-- section reservation -->
   <div>
-    <h1>Register</h1>
-    <form action="/register" method="post">
+    <h1>Reservation</h1>
+    <button href="/">Cancel Reservation</button>
+    <form action="" method="post">
       <div>
-        <label for="username">Username :</label>
-        <input type="text" name="username">
+        <label for="date">Date of Reservation :</label>
+        <input type="datetime" name="date" id="">
       </div>
       <div>
-        <label for="email">Email :</label>
-        <input type="email" name="email">
+        <label for="tableNumber">Table Number :</label>
+        <select name="tableNumber" id="">
+          <option value="" selected>--Select Table Number--</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
       </div>
       <div>
-        <label for="password">Password :</label>
-        <input type="password" name="password" id="">
+        <button href="/">Cancel</button>
       </div>
-      <!-- tidak perlu input role karena role otomatis menjadi "user" atau "customer" by Default -->
-      <button type="submit">Register</button>
+      <div>
+        <h2>Choose 1 dish for your serving</h2>
+        <!-- looping data dishes di sini -->
+        <div>
+          <!-- foto hidangan -->
+          <img src="">
+          <div>
+            <!-- nama hidangan -->
+            <h5></h5>
+            <!-- deskripsi hidangan -->
+            <p></p>
+            <button type="submit">Order</button>
+          </div>
+        </div>
+      </div>
     </form>
-    <button href="/">Cancel</button>
   </div>
   <!-- copyright dan nama para pembuat project di footer -->
   <footer>
-    
+  
   </footer>
 </body>
 </html>

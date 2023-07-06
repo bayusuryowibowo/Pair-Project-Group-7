@@ -1,24 +1,63 @@
-<%- include('Header.ejs', {title :'Login'}) %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dimbay's Steak House</title>
+</head>
 <body>
-
-  <h1>Login</h1>
-
-
-  <form action="/login" method="post">
-    <% if (error) { %>
-     <p style="color: red;"><%= error %></p>
-    <% } %>
-    <label for="">Username</label><br>
-    <input type="text" name="username"><br><br>
-
-    <label for="">Password</label><br>
-    <input type="password" name="password"><br><br>
-
-    <input type="submit" value="Submit">
-
-
-  </form>
-
+  <!-- navigation bar nanti dibuat dinamis jika masih ada sisa waktu -->
+  <header>
+    <nav>
+      <div>
+        <a href="#">Logo</a>
+        <div>
+          <ul>
+            <li>
+              <a href="/register">Register</a>
+            </li>
+            <li>
+              <a href="/login">Login</a>
+            </li>
+            <!-- link Reservation disesuaikan dengan route-nya nanti -->
+            <li>
+              <a href="">Reservation</a>
+            </li>
+            <!-- link Logout disesuaikan dengan route-nya nanti -->
+            <li>
+              <a href="">Logout</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+  </header>
+  <!-- form input login -->
+  <div>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+      <div>
+        <label for="username">Username :</label>
+        <input type="text" name="username">
+      </div>
+      <div>
+        <label for="email">Email :</label>
+        <input type="email" name="email">
+      </div>
+      <div>
+        <label for="password">Password :</label>
+        <input type="password" name="password" id="">
+      </div>
+      <!-- tidak perlu input role karena role otomatis menjadi "user" atau "customer" by Default -->
+      <div>
+        <button type="submit">Login</button>
+      </div>
+    </form>
+    <button href="/">Cancel</button>
+  </div>
+  <!-- copyright dan nama para pembuat project di footer -->
+  <footer>
+    
+  </footer>
+>>>>>>> 6daed01b435f870c1918ba774a50e7366d699a3a
 </body>
-
 </html>

@@ -6,8 +6,7 @@ const bcrpyt =require('bcryptjs')
 class Controller {
 
   static home(req,res) {
-    res.render("Home")
-
+    res.render('Home')
   }
 
    static register(req,res) {
