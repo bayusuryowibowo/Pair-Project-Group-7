@@ -17,7 +17,9 @@ class Controller {
       })
   }
   static register(req, res) {
-    res.render("Register")
+    // console.log(req.query);
+    const error = req.query.error ? req.query.error.split('-').join(', ') : null;
+    res.render("Register", { error })
   }
   static createUser(req, res) {
     User.create(req.body)
@@ -38,7 +40,9 @@ class Controller {
         console.log(err);
         if (err.name === 'SequelizeValidationError' ||
           err.name === "SequelizeUniqueConstraintError") {
-          return res.send(err.errors.map((el) => el.message));
+          // return res.send(err.errors.map((el) => el.message))
+          const error = err.errors.map((el) => el.message).join('-');
+          return res.redirect(`/register?error=${error}`)
         }
         res.send(err);
       })

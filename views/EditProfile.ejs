@@ -54,9 +54,9 @@
       <div class="mb-3">
         <label for="email" class="form-label">Gender :</label>
        <select name="gender" class="form-control w-25">
-        <option value="" <% if(!data.gender) selected %>disabled>--select gender--</option>
-        <option value="Male" >Male</option>
-        <option value="Female" >Female</option>
+         <option value="" selected disabled>--select gender--</option>
+        <option value="Male" <%=data.gender === 'Male'? 'selected' : ''%>>Male</option>
+        <option value="Female" <%=data.gender === 'Female'? 'selected' : ''%>>Female</option>
        </select>
       </div>
       <!-- tidak perlu input role karena role otomatis menjadi "user" atau "customer" by Default -->

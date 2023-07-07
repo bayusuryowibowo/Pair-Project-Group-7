@@ -35,8 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Reservation',
   });
 
-  Reservation.addHook("beforeSave",(reservation)=>{
-    reservation.code = reservation.createCode();
+  Reservation.addHook("beforeSave",(instance)=>{
+    instance.code = instance.createCode();
   })
   return Reservation;
 };

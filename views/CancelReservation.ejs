@@ -54,7 +54,6 @@
   </style>
   <div>
     <h1>Reservation</h1>
-    <button onclick="location.href='/cancelreservation'" class="btn btn-danger">Cancel Reservation</button>
     <table style="border: 1px solid;">
 
      <tr>
@@ -72,7 +71,7 @@
         <td><%= perData.tableNumber %></td>
         <td><%= formatCurrency(perData.totalPrice) %></td>
         <td>
-          <a href="/reservation/<%= perData.code %>/delete"><button>Delete</button></a>
+          <a href="/reservation/<%= perData.code %>/delete"><button class="btn btn-danger">Delete</button></a>
         </td>
       </tr>
    <% }) %>
