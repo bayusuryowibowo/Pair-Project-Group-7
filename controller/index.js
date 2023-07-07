@@ -146,9 +146,10 @@ class Controller {
 
   static cancelReservation(req, res) {
     const UserId = req.session.userId
+    const role = req.session.role
     Reservation.findAll({where:{UserId:UserId}})
     .then((data)=>{
-      res.render('CancelReservation',{data,formatCurrency,})
+      res.render('CancelReservation',{data,formatCurrency,role})
     })
     .catch((err)=>{
       console.log(err);
@@ -157,6 +158,7 @@ class Controller {
 
   }
  static dataReservation(req,res) {
+    const role = req.session.role
     Reservation.findAll({
       include:[
         {
@@ -169,14 +171,14 @@ class Controller {
     })
     .then((data)=>{
       console.log(data)
-      res.render('SecretReservation',{data,formatCurrency})
+      res.render('SecretReservation',{data,formatCurrency,role})
     })
      .catch((err)=>{
       console.log(err);
       res.send(err);
     })
   }
-  
+
   static editProfile(req,res) {
      const UserId = req.session.userId
     Profile.findOne({where:{
