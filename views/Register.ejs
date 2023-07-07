@@ -43,6 +43,12 @@
   <!-- form input register -->
   <div class="container" id="container-input">
     <h1>Register</h1>
+    <% if (error) { %>
+      <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+        <strong><%= error %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } %>
     <form action="/register" method="post">
       <div class="mb-3">
         <label for="username" class="form-label">Username :</label>
