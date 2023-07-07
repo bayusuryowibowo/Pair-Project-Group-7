@@ -60,7 +60,7 @@ class Controller {
     if (!password) {
       let error = `Password is required`;
 
-      res.redirect(`/login?error=${error}`)
+      return res.redirect(`/login?error=${error}`)
 
     }
     User.findOne({
