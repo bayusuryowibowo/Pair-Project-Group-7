@@ -1,4 +1,4 @@
-
+"use strict";
 const formatCurrency = require('../helpers/formatCurrency')
 const formatDate = require('../helpers/formatDate')
 const { User, Profile, Dish, Reservation } = require('../models/index')
@@ -17,30 +17,28 @@ class Controller {
       })
   }
   static register(req, res) {
-    // console.log(req.query);
     const error = req.query.error ? req.query.error.split('-').join(', ') : null;
     res.render("Register", { error })
   }
   static createUser(req, res) {
     User.create(req.body)
       .then((data) => {
-        const {id} = data
+        const { id } = data
         req.session.userId = id
-         req.session.role = data.role;
+        req.session.role = data.role;
         return Profile.create({
           fullName: "",
-          gender : "",
-          UserId : id,
+          gender: "",
+          UserId: id,
         })
       })
-      .then(()=>{
+      .then(() => {
         res.redirect('/')
       })
       .catch((err) => {
         console.log(err);
         if (err.name === 'SequelizeValidationError' ||
           err.name === "SequelizeUniqueConstraintError") {
-          // return res.send(err.errors.map((el) => el.message))
           const error = err.errors.map((el) => el.message).join('-');
           return res.redirect(`/register?error=${error}`)
         }
@@ -48,11 +46,9 @@ class Controller {
       })
   }
 
-
-  static login (req,res) {
-    let {error} = req.query;
-    res.render("Login",{error})
-
+  static login(req, res) {
+    const { error } = req.query;
+    res.render("Login", { error });
   }
 
   static postLogin(req, res) {
@@ -63,31 +59,28 @@ class Controller {
     }
     if (!password) {
       let error = `Password is required`;
-
       return res.redirect(`/login?error=${error}`)
-
     }
     User.findOne({
       where: {
         username: username
       }
     })
-
-    .then((user)=>{
-    const isCorrectPassword = bcrpyt.compareSync(password, user.password)
-    if (isCorrectPassword){
-      req.session.userId = user.id;//set userId ke session 
-      req.session.role = user.role;//set role ke session
-      return res.redirect('/')
-    } else {
-      let error = 'Invalid username/password'
-      return res.redirect(`/login?error=${error}`)
-    }
-    })
-    .catch((err)=>{
-      console.log(err);
-      res.send(err);
-    })
+      .then((user) => {
+        const isCorrectPassword = bcrpyt.compareSync(password, user.password)
+        if (isCorrectPassword) {
+          req.session.userId = user.id;//set userId ke session 
+          req.session.role = user.role;//set role ke session
+          return res.redirect('/')
+        } else {
+          let error = 'Invalid username/password'
+          return res.redirect(`/login?error=${error}`)
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
 
   }
 
@@ -137,7 +130,9 @@ class Controller {
       .then((data) => {
         totalPrice = data.price;
         console.log(date, tableNumber, DishId, totalPrice)
-        return Reservation.create({ date, tableNumber, totalPrice, DishId, UserId })
+        return Reservation.create({
+          date, tableNumber, totalPrice, DishId, UserId
+        })
       })
       .then(() => {
         res.redirect('/reservation?msg=Reservation-Added')
@@ -152,89 +147,88 @@ class Controller {
   static cancelReservation(req, res) {
     const UserId = req.session.userId
     const role = req.session.role
-    Reservation.findAll({where:{UserId:UserId}})
-    .then((data)=>{
-      res.render('CancelReservation',{data,formatCurrency,role,formatDate})
-    })
-    .catch((err)=>{
-      console.log(err);
-      res.send(err);
-    })
+    Reservation.findAll({ where: { UserId: UserId } })
+      .then((data) => {
+        res.render('CancelReservation', {
+          data, formatCurrency, role, formatDate
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
 
   }
- static dataReservation(req,res) {
+  static dataReservation(req, res) {
     const role = req.session.role
     Reservation.findAll({
-      include:[
+      include: [
         {
-           model:User
+          model: User
         },
         {
-          model:Dish
+          model: Dish
         }
-        ]
+      ]
     })
-    .then((data)=>{
-      console.log(data)
-      res.render('SecretReservation',{data,formatCurrency,role,formatDate})
-    })
-     .catch((err)=>{
-      console.log(err);
-      res.send(err);
-    })
+      .then((data) => {
+        console.log(data)
+        res.render('SecretReservation', { data, formatCurrency, role, formatDate })
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
   }
 
-  static editProfile(req,res) {
-     const UserId = req.session.userId
-    Profile.findOne({where:{
-      UserId: UserId
-    }})
-    .then((data)=>{
-      res.render('EditProfile',{data})
-    })
-     .catch((err)=>{
-      console.log(err);
-      res.send(err);
-    })
-  }
-
-   static saveProfile(req,res) {
+  static editProfile(req, res) {
     const UserId = req.session.userId
-    const {fullName,gender} = req.body
-    Profile.update({fullName,gender,UserId},{
-      where:{UserId:UserId}
+    Profile.findOne({
+      where: {
+        UserId: UserId
+      }
     })
-    .then(()=>{
-      res.redirect('/')
-    })
-     .catch((err)=>{
-      console.log(err);
-      res.send(err);
-    })
+      .then((data) => {
+        res.render('EditProfile', { data })
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
   }
-  
-  static deleteReservation(req,res) {
+
+  static saveProfile(req, res) {
+    const UserId = req.session.userId
+    const { fullName, gender } = req.body
+    Profile.update({ fullName, gender, UserId }, {
+      where: { UserId: UserId }
+    })
+      .then(() => {
+        res.redirect('/')
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
+  }
+
+  static deleteReservation(req, res) {
     const code = req.params.code
-    
     Reservation.destroy({
-      where:{
+      where: {
         code: code
       }
     })
-    .then(()=>{
-      if(req.session.role=='admin'){
-      res.redirect('/secretreservation')
-      } else  res.redirect('/cancelreservation')
-    })
-    .catch((err)=>{
-      console.log(err);
-      res.send(err);
-    })
+      .then(() => {
+        if (req.session.role == 'admin') {
+          res.redirect('/secretreservation')
+        } else res.redirect('/cancelreservation')
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
   }
-
-
-
-
 }
 
 module.exports = Controller

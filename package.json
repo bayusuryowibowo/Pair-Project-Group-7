@@ -9,7 +9,6 @@
   "author": "Bayu Suryo Wibowo & Dimas Hananto",
   "license": "ISC",
   "dependencies": {
-    "@googleapis/calendar": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.9",
     "ejs": "^3.1.9",

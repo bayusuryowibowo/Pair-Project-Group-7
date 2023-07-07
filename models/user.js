@@ -43,11 +43,11 @@ module.exports = (sequelize, DataTypes) => {
         notNull: { msg: 'Password is required' },
         isIncludeChar() {
           const regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-          if(!regularExpression.test(this.password)) throw new Error('Password must include a number and a special expression')
+          if(!regularExpression.test(this.password)) throw new Error('Password must include number and special expression')
         },
         len:{
           args: [8],
-          msg: "Password must be minimal 8 and maximum of 20 characters"
+          msg: "Password must be minimal 8 of characters"
         }
 
       }

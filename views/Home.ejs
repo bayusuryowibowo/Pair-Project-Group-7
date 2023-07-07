@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-dark text-white">
   <!-- navigation bar nanti dibuat dinamis jika masih ada sisa waktu -->
   <header>
     <nav id="navbar" class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
@@ -56,43 +56,57 @@
         </div>
     </nav>
   </header>
-  <div class="bg-dark text-white">
+  <div>
     <!-- section welcoming -->
     <div class="p-3 mb-2" style="margin-bottom: 50px;">
       <h1 class="text-center">Welcome to Dimbay's Steak House</h1>
     </div> 
     <!-- tampilan menu yang tersedia -->
-    <div>
-      <!-- looping data dishes di sini -->
-      <% dishes.forEach(el => { %>
-        <div>
-          <!-- foto hidangan -->
-          <img src="<%= el.imgURL %>" class="img-fluid">
-          <div>
-            <!-- nama hidangan -->
-            <h5><%= el.name %></h5>
-            <!-- deskripsi hidangan -->
-            <p><%= el.description %></p>
+    <div id="carouselExampleCaptions" class="carousel slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <% dishes.forEach(el => { %>
+          <div class="carousel-item active">
+            <!-- foto hidangan -->
+            <img src="<%= el.imgURL %>" class="d-block w-100">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- nama hidangan -->
+              <h5><%= el.name %></h5>
+              <!-- deskripsi hidangan -->
+              <p><%= el.description %></p>
+            </div>
           </div>
-        </div>
-      <% }); %>
+        <% }); %>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   </div>
   <!-- copyright dan nama para pembuat project di footer -->
   <footer>
-    <!-- <div>
+    <div>
       <h6>This project was created by :</h6>
       <strong>Bayu Suryo Wibowo</strong><br>
       <strong>Dimas Hananto</strong>
     </div>
-    <div>
+    <div style="margin-top: 50px;">
       <h6>Disclaimer</h6>
       <p>We don't own these images.</p>
       <p>These images belongs to :</p>
       <p><a href="https://www.freepik.com/free-photo/grilled-beef-steak-dark-wooden-surface_14454667.htm#query=tenderloin%20steak&position=0&from_view=search&track=ais">Image by jcomp</a> on Freepik</p>
       <p><a href="https://www.freepik.com/free-photo/grilled-beef-steak-with-fries-grilled-tomato-pepper-sauces_8058187.htm#page=2&query=sirloin%20steak&position=8&from_view=search&track=ais">Image by KamranAydinov</a> on Freepik</p>
       <p>Image by <a href="https://www.freepik.com/free-photo/wine-glass-bottle-barrel_4884534.htm#query=Cabernet%20Sauvignon&position=10&from_view=search&track=ais">Freepik</a></p>
-    </div> -->
+    </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
