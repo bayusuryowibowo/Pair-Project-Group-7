@@ -1,5 +1,6 @@
 
 const formatCurrency = require('../helpers/formatCurrency')
+const formatDate = require('../helpers/formatDate')
 const { User, Profile, Dish, Reservation } = require('../models/index')
 const bcrpyt = require('bcryptjs')
 
@@ -23,7 +24,7 @@ class Controller {
       .then((data) => {
         const {id} = data
         req.session.userId = id
-        console.log(req.session.userId)
+         req.session.role = data.role;
         return Profile.create({
           fullName: "",
           gender : "",
@@ -146,9 +147,10 @@ class Controller {
 
   static cancelReservation(req, res) {
     const UserId = req.session.userId
+    const role = req.session.role
     Reservation.findAll({where:{UserId:UserId}})
     .then((data)=>{
-      res.render('CancelReservation',{data,formatCurrency,})
+      res.render('CancelReservation',{data,formatCurrency,role,formatDate})
     })
     .catch((err)=>{
       console.log(err);
@@ -156,21 +158,28 @@ class Controller {
     })
 
   }
-
-  static dataReservation(req,res) {
-    // res.render('secretReservation')
+ static dataReservation(req,res) {
+    const role = req.session.role
     Reservation.findAll({
-      include: {
-        model: User,
-        model: Dish
-      }
+      include:[
+        {
+           model:User
+        },
+        {
+          model:Dish
+        }
+        ]
     })
-      .then((data) => res.send(data))
-      .catch((err) => {
-        console.log(err);
-        res.send(err);
-      })
+    .then((data)=>{
+      console.log(data)
+      res.render('SecretReservation',{data,formatCurrency,role,formatDate})
+    })
+     .catch((err)=>{
+      console.log(err);
+      res.send(err);
+    })
   }
+
   static editProfile(req,res) {
      const UserId = req.session.userId
     Profile.findOne({where:{
@@ -218,6 +227,9 @@ class Controller {
       res.send(err);
     })
   }
+
+
+
 
 }
 

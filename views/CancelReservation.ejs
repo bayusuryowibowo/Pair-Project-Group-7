@@ -21,12 +21,14 @@
             <li>
               <a class="nav-link" href="/">Home</a>
             </li>
+             <% if (!role) { %>
             <li class="nav-item">
               <a class="nav-link" href="/register">Register</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
+               <% } %>
             <!-- link Reservation disesuaikan dengan route-nya nanti -->
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/reservation">Reservation</a>
@@ -60,7 +62,7 @@
       <% console.log(perData) %>
       <tr>
         <td><%= perData.code %></td>
-        <td><%= perData.date %></td>
+        <td><%= formatDate(perData.date)%></td>
         <td><%= perData.tableNumber %></td>
         <td><%= formatCurrency(perData.totalPrice) %></td>
         <td>
