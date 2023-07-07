@@ -1,5 +1,6 @@
 
 const formatCurrency = require('../helpers/formatCurrency')
+const formatDate = require('../helpers/formatDate')
 const { User, Profile, Dish, Reservation } = require('../models/index')
 const bcrpyt = require('bcryptjs')
 
@@ -149,7 +150,7 @@ class Controller {
     const role = req.session.role
     Reservation.findAll({where:{UserId:UserId}})
     .then((data)=>{
-      res.render('CancelReservation',{data,formatCurrency,role})
+      res.render('CancelReservation',{data,formatCurrency,role,formatDate})
     })
     .catch((err)=>{
       console.log(err);
@@ -171,7 +172,7 @@ class Controller {
     })
     .then((data)=>{
       console.log(data)
-      res.render('SecretReservation',{data,formatCurrency,role})
+      res.render('SecretReservation',{data,formatCurrency,role,formatDate})
     })
      .catch((err)=>{
       console.log(err);

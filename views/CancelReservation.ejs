@@ -62,7 +62,7 @@
       <% console.log(perData) %>
       <tr>
         <td><%= perData.code %></td>
-        <td><%= perData.date %></td>
+        <td><%= formatDate(perData.date)%></td>
         <td><%= perData.tableNumber %></td>
         <td><%= formatCurrency(perData.totalPrice) %></td>
         <td>
